@@ -17,10 +17,10 @@ def get_info() -> dict:
     """
     return {
         "apiversion": "1",
-        "author": "Sir-Pent",  
-        "color": "#202252", 
-        "head": "moustache",  
-        "tail": "shiny", 
+        "author": "",  # TODO: Your Battlesnake Username
+        "color": "#888888",  # TODO: Personalize
+        "head": "default",  # TODO: Personalize
+        "tail": "default",  # TODO: Personalize
     }
 
 
