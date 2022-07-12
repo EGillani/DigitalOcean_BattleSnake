@@ -1,6 +1,6 @@
 import logging
 import os
-
+import global_variables as gv
 from flask import Flask
 from flask import request
 
@@ -28,7 +28,10 @@ def handle_start():
     request.json contains information about the game that's about to be played.
     """
     data = request.get_json()
-
+    
+    gv.BOARD_MAX_X = data["board"]["width"]
+    gv.BOARD_MAX_Y = data["board"]["height"]
+    
     print(f"{data['game']['id']} START")
     return "ok"
 
