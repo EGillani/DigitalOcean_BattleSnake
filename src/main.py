@@ -81,15 +81,6 @@ def handle_move():
         all_food.append((food["x"], food["y"]))
         board[food["x"]][food["y"]] = 0
 
-    #populating all hazards
-    all_hazards_data = data["board"]["hazards"]
-    for hazard in all_hazards_data:
-        all_hazards.append((hazard["x"], hazard["y"]))
-        board[hazard["x"]][hazard["y"]] = 0
-        
-    all_avoid_parts = all_hazards + all_snake_body_parts
-    print(all_avoid_parts)
-
     food_and_snakes = copy.deepcopy(snake_walls)
     for food in all_food_data:
         food_and_snakes.append((food["x"], food["y"]))
@@ -108,22 +99,23 @@ def handle_move():
     avg_length = (curr_total_length)/curr_number_of_snakes
 
     #move = strategy_open.go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall)
-    move = strategy_open.go_to_open_old(data, board, food_and_snakes, all_avoid_parts)
-    #if data["you"]["health"] > 70 and our_length < avg_length:
-    # if data["you"]["health"] > 70:
-    #     move = strategy_open.go_to_open_old(data, board, food_and_snakes, all_avoid_parts)
-    #     print("running away")
-    #     if move is not None:
-    #         print(f"MOVE: {move}")
-    #         return {"move": move}
-    # else: #go for food
-    #     print("going for food")
-    #     move = strategy.go_for_food_Dij(data,snake_walls, other_snakes_wall, all_food)
-    #     if move is None:
-    #         move = strategy_open.go_to_open_old(data, board, food_and_snakes, all_avoid_parts)
-    #         if move is not None:
-    #             print(f"MOVE: {move}")
-    #             return {"move": move}
+    #move = strategy_open.go_to_open_old(data, board, food_and_snakes, all_snake_body_parts)
+    if data["you"]["health"] > 70 and our_length < avg_length:
+        move = strategy_open.go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall)
+        #move = strategy_open.go_to_open_old(data, board, food_and_snakes, all_avoid_parts)
+        print("running away")
+        if move is not None:
+            print(f"MOVE: {move}")
+            return {"move": move}
+    else: #go for food
+        print("going for food")
+        move = strategy.go_for_food_Dij(data,snake_walls, other_snakes_wall, all_food)
+        if move is None:
+            #move = strategy_open.go_to_open_old(data, board, food_and_snakes, all_avoid_parts)
+            move = strategy_open.go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall)
+            if move is not None:
+                print(f"MOVE: {move}")
+                return {"move": move}
 
 
     print(f"MOVE: {move}")
