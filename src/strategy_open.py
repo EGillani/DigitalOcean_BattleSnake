@@ -13,13 +13,13 @@ def go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall):
   open_space_star.grid_width = data["board"]["width"]
   
   the_closest_open_value = findopenspace(board)
-  logging.info(f"closest open value {the_closest_open_value}")
+  print(f"closest open value {the_closest_open_value}")
   #print("closet open value" + str(the_closest_open_value))
   open_space_star.init_grid(open_space_star.grid_width, open_space_star.grid_height, walls = snake_walls, others_walls = other_snakes_wall, start = our_head)
   open_space_star.solve()
 
   curr_path = open_space_star.get_path(the_closest_open_value[0],the_closest_open_value[1])
-  logging.info(f"path: {curr_path}")
+  print(f"path: {curr_path}")
   if curr_path is not None:
 
     if (curr_path[1][0] < our_head[0]):
