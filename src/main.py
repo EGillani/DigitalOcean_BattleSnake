@@ -100,7 +100,14 @@ def handle_move():
 
     #move = strategy_open.go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall)
     #move = strategy_open.go_to_open_old(data, board, food_and_snakes, all_snake_body_parts)
-    if data["you"]["health"] > 90 and our_length < avg_length:
+    if our_length >= avg_length:
+        move = strategy_open.go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall)
+        #move = strategy_open.go_to_open_old(data, board, food_and_snakes, all_avoid_parts)
+        print("running away")
+        if move is not None:
+            print(f"MOVE: {move}")
+            return {"move": move}
+    elif data["you"]["health"] > 80 and our_length < avg_length:
         move = strategy_open.go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall)
         #move = strategy_open.go_to_open_old(data, board, food_and_snakes, all_avoid_parts)
         print("running away")
