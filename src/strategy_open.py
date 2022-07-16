@@ -18,7 +18,6 @@ def go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall):
   open_space_star.solve()
 
   curr_path = open_space_star.get_path(the_closest_open_value[0],the_closest_open_value[1])
-  print(f"path: {curr_path}")
   curr_path = curr_path[0]
   if curr_path is not None:
 
