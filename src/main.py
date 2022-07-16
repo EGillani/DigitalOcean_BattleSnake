@@ -1,3 +1,4 @@
+from cmath import log
 import logging
 import os
 import copy
@@ -6,7 +7,7 @@ import strategy
 import strategy_open
 from flask import Flask
 from flask import request
-
+import logging
 app = Flask(__name__)
 
 
@@ -94,35 +95,23 @@ def handle_move():
 
     curr_total_length = len(other_snakes_wall)
     avg_length = (curr_total_length)/curr_number_of_snakes
-    ##########3 or less Snakes###############
-    if curr_number_of_snakes <= 2:
-        if data["you"]["health"] > 90 and our_length < avg_length:
-            move = strategy_open.go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall)
-            if move is not None:
-                print(f"MOVE: {move}")
-                return {"move": move}
-        else: #go for food
-            move = strategy.go_for_food_Dij(data,snake_walls, other_snakes_wall, all_food)
-            if move is None:
-                move = strategy_open.go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall)
-                if move is not None:
-                    print(f"MOVE: {move}")
-                    return {"move": move}
-    #multiple snakes 
-    else:
-        if data["you"]["health"] > 95 and our_length < 5:
-            move = strategy_open.go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall)
-            if move is not None:
-                print(f"MOVE: {move}")
-                return {"move": move}
-        else: #go for food
-            move = strategy.go_for_food_Dij(data,snake_walls, other_snakes_wall, all_food)
-            if move is None:
-                move = strategy_open.go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall)
-                if move is not None:
-                    print(f"MOVE: {move}")
-                    return {"move": move}
-    #######################################
+
+    move = strategy_open.go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall)
+    # if data["you"]["health"] > 70 and our_length < avg_length:
+    #     move = strategy_open.go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall)
+    #     logging.info("running away")
+    #     if move is not None:
+    #         print(f"MOVE: {move}")
+    #         return {"move": move}
+    # else: #go for food
+    #     logging.info("going for food")
+    #     move = strategy.go_for_food_Dij(data,snake_walls, other_snakes_wall, all_food)
+    #     if move is None:
+    #         move = strategy_open.go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall)
+    #         if move is not None:
+    #             print(f"MOVE: {move}")
+    #             return {"move": move}
+
 
     print(f"MOVE: {move}")
     return {"move": move}

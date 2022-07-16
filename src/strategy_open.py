@@ -17,8 +17,7 @@ def go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall):
 
   curr_path, weight = open_space_star.get_path(the_closest_open_value[0],the_closest_open_value[1])
   if curr_path is not None:
-    #all_paths.sort(key=len)
-    #print("paths sorted: ",all_paths)
+
     if (curr_path[1][0] < our_head[0]):
       move = "left"
     elif (curr_path[1][0] > our_head[0]):
@@ -27,7 +26,8 @@ def go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall):
       move = "down"
     else:
       move = "up"
-    #print(path)
+      print("strategy open")
+
   else:
     move = None
   
