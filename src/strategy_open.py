@@ -31,7 +31,9 @@ def go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall):
       move = "up"
 
   else:
-    move = None
+    possible_moves = strategy.determine_possible_moves(data, snake_walls + other_snakes_wall)
+    #and head towards open areas 
+    move = random.choice(possible_moves)
   
   return move
 
