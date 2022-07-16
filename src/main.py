@@ -96,7 +96,8 @@ def handle_move():
     curr_total_length = len(other_snakes_wall)
     avg_length = (curr_total_length)/curr_number_of_snakes
 
-    move = strategy_open.go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall)
+    #move = strategy_open.go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall)
+    move = strategy_open.go_to_open_old(data, board, food_and_snakes, all_snake_body_parts)
     # if data["you"]["health"] > 70 and our_length < avg_length:
     #     move = strategy_open.go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall)
     #     logging.info("running away")
