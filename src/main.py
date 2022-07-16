@@ -56,6 +56,7 @@ def handle_move():
     other_snakes_wall = []
     food_and_snakes = []
     all_food = []
+    all_hazards = []
     board = []
     length_of_each_snake = []
     #populating an empty board 
@@ -80,6 +81,14 @@ def handle_move():
         all_food.append((food["x"], food["y"]))
         board[food["x"]][food["y"]] = 0
 
+    #populating all hazards
+    all_hazards = data["board"]["hazards"]
+    for hazard in all_hazards:
+        all_hazards.append((hazard["x"], hazard["y"]))
+        board[hazard["x"]][hazard["y"]] = 0
+        
+    all_avoid_parts = all_hazards + all_snake_body_parts
+
     food_and_snakes = copy.deepcopy(snake_walls)
     for food in all_food_data:
         food_and_snakes.append((food["x"], food["y"]))
@@ -100,7 +109,7 @@ def handle_move():
     #move = strategy_open.go_to_open(data, board, food_and_snakes, snake_walls, other_snakes_wall)
     #if data["you"]["health"] > 70 and our_length < avg_length:
     if data["you"]["health"] > 70:
-        move = strategy_open.go_to_open_old(data, board, food_and_snakes, all_snake_body_parts)
+        move = strategy_open.go_to_open_old(data, board, food_and_snakes, all_avoid_parts)
         logging.info("running away")
         if move is not None:
             print(f"MOVE: {move}")
@@ -109,7 +118,7 @@ def handle_move():
         logging.info("going for food")
         move = strategy.go_for_food_Dij(data,snake_walls, other_snakes_wall, all_food)
         if move is None:
-            move = strategy_open.go_to_open_old(data, board, food_and_snakes, all_snake_body_parts)
+            move = strategy_open.go_to_open_old(data, board, food_and_snakes, all_avoid_parts)
             if move is not None:
                 print(f"MOVE: {move}")
                 return {"move": move}
