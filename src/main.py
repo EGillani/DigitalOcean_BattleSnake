@@ -82,8 +82,8 @@ def handle_move():
         board[food["x"]][food["y"]] = 0
 
     #populating all hazards
-    all_hazards = data["board"]["hazards"]
-    for hazard in all_hazards:
+    all_hazards_data = data["board"]["hazards"]
+    for hazard in all_hazards_data:
         all_hazards.append((hazard["x"], hazard["y"]))
         board[hazard["x"]][hazard["y"]] = 0
         
